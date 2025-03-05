@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>Rolling 시작!</h1>
+      <h1>Rolling 시작! PR template 테스트</h1>
     </>
   );
 }
