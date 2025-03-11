@@ -3,9 +3,10 @@ import EmojiPicker from "emoji-picker-react";
 import styled from "styled-components";
 import EmojiIcon from "../../../assets/images/emoji.png";
 import toggle from "../../../assets/images/toggle.png";
+import arrowLeft from '../../../assets/images/arrow-left.png';
 
 const MAX_EMOJIS = 8;
-const TOPEMOJIS = 3;
+const TOP_EMOJIS = 3;
 
 function Emoji() {
   const [showPicker, setShowPicker] = useState(false);
@@ -32,7 +33,7 @@ function Emoji() {
     <ServieContainer>
       <Header>
         <TopEmojisContainer>
-          {sortedEmojiMap.slice(0, TOPEMOJIS).map(([emoji, count]) => (
+          {sortedEmojiMap.slice(0, TOP_EMOJIS).map(([emoji, count]) => (
             <TopEmojiItem key={emoji}>
               <EmojiImage>{emoji}</EmojiImage>
               <EmojiCount>{count}</EmojiCount>
@@ -41,11 +42,13 @@ function Emoji() {
         </TopEmojisContainer>
 
         <ActionsContainer>
-          {!showAllEmojis && sortedEmojiMap.length > TOPEMOJIS && (
+          {!showAllEmojis && sortedEmojiMap.length > TOP_EMOJIS ? (
             <ShowMoreButton onClick={() => setShowAllEmojis(true)}>
               <Icon src={toggle} alt="아래표시" />
             </ShowMoreButton>
-          )}
+          ): <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
+          <Icon src={arrowLeft} alt="아래표시" />
+        </ShowMoreButton>}
 
           <AddButton onClick={() => setShowPicker(!showPicker)}>
             <Icon src={EmojiIcon} alt="EmojiIcon" />
@@ -83,6 +86,7 @@ const Icon = styled.img`
 
 const ServieContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
 `;
@@ -131,6 +135,7 @@ const ActionsContainer = styled.div`
 `;
 
 const ShowMoreButton = styled.button`
+  position: relative;
   background-color: transparent;
   border: none;
   font-size: 20px;
@@ -157,13 +162,16 @@ const AddButton = styled.button`
 `;
 
 const PickerWrapper = styled.div`
-  position: relative;
+  position: absolute;
+  top: 50px;
+  right: 0;
   z-index: 10;
 `;
 
 const AllEmojisContainer = styled.div`
-  position: relative;
+  position: absolute;
   z-index: 5;
+  top: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,6 +183,7 @@ const AllEmojisContainer = styled.div`
 const MoreEmojisWrapper = styled.div`
   position: absolute;
   top: 10%;
+  right: -20px;
   width: 312px;
   height: auto;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -202,3 +211,4 @@ const AllEmojiItem = styled.div`
   font-size: 20px;
   text-align: center;
 `;
+

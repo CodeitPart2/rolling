@@ -10,6 +10,7 @@ function InformationBar() {
 
       <CenterSection>
         <span>명이 작성했어요!</span>
+
         <Emoji type="" count={5} />
         <Button>
           <ShareIcon src={Share} alt="Share Logo" />
