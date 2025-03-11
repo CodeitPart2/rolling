@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import styled from "styled-components";
+import EmojiIcon from "../../../assets/images/emoji.png";
+import toggle from "../../../assets/images/toggle.png";
 
 const MAX_EMOJIS = 8;
 const TOPEMOJIS = 3;
@@ -27,7 +29,7 @@ function Emoji() {
     .slice(0, MAX_EMOJIS);
 
   return (
-    <Container>
+    <ServieContainer>
       <Header>
         <TopEmojisContainer>
           {sortedEmojiMap.slice(0, TOPEMOJIS).map(([emoji, count]) => (
@@ -41,22 +43,20 @@ function Emoji() {
         <ActionsContainer>
           {!showAllEmojis && sortedEmojiMap.length > TOPEMOJIS && (
             <ShowMoreButton onClick={() => setShowAllEmojis(true)}>
-              <img src="./src/images/Polygon.png" alt="아래표시" />
+              <Icon src={toggle} alt="아래표시" />
             </ShowMoreButton>
           )}
+
           <AddButton onClick={() => setShowPicker(!showPicker)}>
-            <img
-              src="./src/images/emoji.png"
-              alt="이모티콘"
-              width="20"
-              height="20"
-            />
+            <Icon src={EmojiIcon} alt="EmojiIcon" />
             추가
           </AddButton>
         </ActionsContainer>
       </Header>
 
-      {showPicker && <EmojiPicker onEmojiClick={handleEmojiSelect} />}
+      <PickerWrapper>
+        {showPicker && <EmojiPicker onEmojiClick={handleEmojiSelect} />}
+      </PickerWrapper>
 
       {showAllEmojis && (
         <AllEmojisContainer>
@@ -70,13 +70,18 @@ function Emoji() {
           </MoreEmojisWrapper>
         </AllEmojisContainer>
       )}
-    </Container>
+    </ServieContainer>
   );
 }
 
 export default Emoji;
 
-const Container = styled.div`
+const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+`;
+
+const ServieContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,7 +112,7 @@ const TopEmojiItem = styled.div`
   padding: 8px 12px;
   gap: 10px;
   font-size: 20px;
-  text-align: center; /* 중앙 정렬 */
+  text-align: center;
 `;
 
 const EmojiImage = styled.span`
@@ -138,8 +143,10 @@ const ShowMoreButton = styled.button`
 `;
 
 const AddButton = styled.button`
-  background-color: transparent;
-  border: none;
+  width: 88px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #cccccc;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -149,24 +156,34 @@ const AddButton = styled.button`
   color: black;
 `;
 
-// "더보기" 버튼 클릭 시 나타나는 이모티콘 영역
+const PickerWrapper = styled.div`
+  position: relative;
+  z-index: 10;
+`;
+
 const AllEmojisContainer = styled.div`
+  position: relative;
+  z-index: 5;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 20px; /* 상위 3개 이모티콘 아래로 내려줌 */
-  width: 100%; /* 가로폭을 100%로 설정하여 외부에 배치 */
+  width: 3.6rem;
+  height: 3.6rem;
+  padding: 0.6rem;
 `;
 
 const MoreEmojisWrapper = styled.div`
+  position: absolute;
+  top: 10%;
   width: 312px;
-  height: auto; /* 자동 조절 */
+  height: auto;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   padding: 24px;
   gap: 10px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4개씩 출력 */
-  grid-template-rows: repeat(2, auto); /* 2줄 */
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
   justify-content: center;
   align-items: center;
 `;
@@ -183,5 +200,5 @@ const AllEmojiItem = styled.div`
   padding: 8px 12px;
   gap: 10px;
   font-size: 20px;
-  text-align: center; /* 중앙 정렬 */
+  text-align: center;
 `;
