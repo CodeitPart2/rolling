@@ -1,4 +1,3 @@
-import GlobalStyles from "./styles/GlobalStyles";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar/Navbar.core";
 import HomePage from "./pages/Home/HomePage";
@@ -6,15 +5,13 @@ import RollingPaperListPage from "./pages/RollingPaperList/RollingPaperListPage"
 import CreateRollingPaperPage from "./pages/CreateRollingPaper/CreateRollingPaperPage";
 import RollingPaperPage from "./pages/RollingPaper/RollingPaperPage";
 import MessagePage from "./pages/Message/MessagePage";
-
+import NavbarDomain from "./components/common/Navbar/Navbar.domain";
 
 function App() {
-
-
   return (
     <>
-      <GlobalStyles />
       <Navbar />
+      <NavbarDomain />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/list" element={<RollingPaperListPage />} />
