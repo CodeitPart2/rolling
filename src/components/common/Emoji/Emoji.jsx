@@ -12,23 +12,18 @@ function Emoji() {
   const [showPicker, setShowPicker] = useState(false);
   const [emojiMap, setEmojiMap] = useState({});
   const [showAllEmojis, setShowAllEmojis] = useState(false);
-
   function handleEmojiSelect(emojiObject) {
     setEmojiMap((prevMap) => {
       const updatedMap = { ...prevMap };
       const emoji = emojiObject.emoji;
-
       updatedMap[emoji] = (updatedMap[emoji] || 0) + 1;
-
       return updatedMap;
     });
     setShowPicker(false);
   }
-
   const sortedEmojiMap = Object.entries(emojiMap)
     .sort((a, b) => b[1] - a[1])
     .slice(0, MAX_EMOJIS);
-
   return (
     <ServieContainer>
       <Header>
@@ -46,9 +41,17 @@ function Emoji() {
             <ShowMoreButton onClick={() => setShowAllEmojis(true)}>
               <Icon src={toggle} alt="아래표시" />
             </ShowMoreButton>
+
           ): <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
           <Icon src={arrowLeft} alt="아래표시" />
         </ShowMoreButton>}
+
+          ) : (
+            <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
+              <Icon src={toggle} alt="아래표시" />
+            </ShowMoreButton>
+          )}
+
 
           <AddButton onClick={() => setShowPicker(!showPicker)}>
             <Icon src={EmojiIcon} alt="EmojiIcon" />
@@ -56,11 +59,15 @@ function Emoji() {
           </AddButton>
         </ActionsContainer>
       </Header>
-
       <PickerWrapper>
-        {showPicker && <EmojiPicker onEmojiClick={handleEmojiSelect} />}
+        {showPicker && (
+          <EmojiPicker
+            onEmojiClick={handleEmojiSelect}
+            width={306}
+            height={392}
+          />
+        )}
       </PickerWrapper>
-
       {showAllEmojis && (
         <AllEmojisContainer>
           <MoreEmojisWrapper>
@@ -76,9 +83,7 @@ function Emoji() {
     </ServieContainer>
   );
 }
-
 export default Emoji;
-
 const Icon = styled.img`
   width: 20px;
   height: 20px;
@@ -90,7 +95,6 @@ const ServieContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
 const Header = styled.div`
   display: flex;
   align-items: center;
@@ -98,12 +102,13 @@ const Header = styled.div`
   width: 100%;
   margin-bottom: 10px;
 `;
-
 const TopEmojisContainer = styled.div`
+  position: relative;
+  left: 4px;
   display: flex;
   gap: 8px;
+  bottom: -5px;
 `;
-
 const TopEmojiItem = styled.div`
   display: flex;
   align-items: center;
@@ -118,16 +123,13 @@ const TopEmojiItem = styled.div`
   font-size: 20px;
   text-align: center;
 `;
-
 const EmojiImage = styled.span`
   font-size: 20px;
 `;
-
 const EmojiCount = styled.span`
   font-size: 14px;
   font-weight: bold;
 `;
-
 const ActionsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -144,9 +146,8 @@ const ShowMoreButton = styled.button`
   width: 36px;
   height: 36px;
   padding: 10px;
-  margin-right: 10px;
+  bottom: -5px;
 `;
-
 const AddButton = styled.button`
   width: 88px;
   height: 36px;
@@ -164,7 +165,11 @@ const AddButton = styled.button`
 const PickerWrapper = styled.div`
   position: absolute;
   top: 50px;
+
   right: 0;
+
+  right: 20px;
+
   z-index: 10;
 `;
 
@@ -179,14 +184,19 @@ const AllEmojisContainer = styled.div`
   height: 3.6rem;
   padding: 0.6rem;
 `;
-
 const MoreEmojisWrapper = styled.div`
   position: absolute;
+
   top: 10%;
   right: -20px;
+
+  top: -6%;
+  right: -60px;
+
   width: 312px;
   height: auto;
   border: 1px solid rgba(0, 0, 0, 0.08);
+
   border-radius: 8px;
   padding: 24px;
   gap: 10px;
@@ -196,7 +206,6 @@ const MoreEmojisWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const AllEmojiItem = styled.div`
   display: flex;
   align-items: center;
