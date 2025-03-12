@@ -15,9 +15,10 @@ function InformationBar() {
             <WritedText>23명이 작성했어요!</WritedText>
           </WritedContainer>
         </CenterSection>
-
+        <Separator />
         <RightSection>
           <Emoji type="" count={5} />
+          <Separator />
           <Button>
             <ShareIcon src={Share} alt="Share Logo" />
           </Button>
@@ -26,7 +27,13 @@ function InformationBar() {
     </InformationBarWrapper>
   );
 }
-
+const Separator = styled.span`
+  display: inline-block;
+  width: 1px;
+  height: 28px;
+  background-color: #cccccc;
+  margin: 0 13px;
+`;
 const InformationBarWrapper = styled.nav`
   display: flex;
   justify-content: center;
@@ -75,9 +82,11 @@ const ToName = styled.div`
 `;
 
 const WritedContainer = styled.div`
+  position: relative;
+  left: 60px;
   display: flex;
   align-items: center;
-  gap: 11px;
+  gap: 10px;
 `;
 
 const WritedText = styled.span`

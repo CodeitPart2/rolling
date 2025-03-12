@@ -97,6 +97,7 @@ const Header = styled.div`
 `;
 const TopEmojisContainer = styled.div`
   position: relative;
+  left: 4px;
   display: flex;
   gap: 8px;
   bottom: -5px;
