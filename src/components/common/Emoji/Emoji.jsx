@@ -3,6 +3,7 @@ import EmojiPicker from "emoji-picker-react";
 import styled from "styled-components";
 import EmojiIcon from "../../../assets/images/emoji.png";
 import toggle from "../../../assets/images/toggle.png";
+import arrowLeft from '../../../assets/images/arrow-left.png';
 
 const MAX_EMOJIS = 8;
 const TOP_EMOJIS = 3;
@@ -36,11 +37,26 @@ function Emoji() {
         </TopEmojisContainer>
 
         <ActionsContainer>
+
+          {!showAllEmojis && sortedEmojiMap.length > TOP_EMOJIS ? (
+            <ShowMoreButton onClick={() => setShowAllEmojis(true)}>
+              <Icon src={toggle} alt="아래표시" />
+            </ShowMoreButton>
+
+          ): <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
+          <Icon src={arrowLeft} alt="아래표시" />
+        </ShowMoreButton>}
+
+          ) : (
+            <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
+
           {sortedEmojiMap.length >= 4 && ( // 이모티콘이 4개 이상일 때만 버튼 표시
             <ShowMoreButton onClick={() => setShowAllEmojis(!showAllEmojis)}>
+
               <Icon src={toggle} alt="아래표시" />
             </ShowMoreButton>
           )}
+
 
           <AddButton onClick={() => setShowPicker(!showPicker)}>
             <Icon src={EmojiIcon} alt="EmojiIcon" />
@@ -157,7 +173,11 @@ const AddButton = styled.button`
 const PickerWrapper = styled.div`
   position: absolute;
   top: 50px;
+
+  right: 0;
+
   right: 20px;
+
   z-index: 10;
 `;
 
@@ -174,8 +194,13 @@ const AllEmojisContainer = styled.div`
 `;
 const MoreEmojisWrapper = styled.div`
   position: absolute;
+
+  top: 10%;
+  right: -20px;
+
   top: -6%;
   right: -60px;
+
   width: 312px;
   height: auto;
   background-color: ${(props) => props.theme.colors.white};
@@ -204,3 +229,4 @@ const AllEmojiItem = styled.div`
   font-size: ${(props) => props.theme.Typography[20].fontSize};
   text-align: center;
 `;
+

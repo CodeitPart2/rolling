@@ -52,13 +52,33 @@ function InformationBar() {
   };
 
   return (
+
+    <DomainNav>
+      <ToName>
+        <span>To. Ashley Kim</span>
+      </ToName>
+
+      <CenterSection>
+        <span>명이 작성했어요!</span>
+
+        <Emoji type="" count={5} />
+        <Button>
+          <ShareIcon src={Share} alt="Share Logo" />
+        </Button>
+      </CenterSection>
+
     <InformationBarWrapper>
       <InformationBarContainer>
         <LeftSection>
           <ToName>To. Ashley Kim</ToName>
         </LeftSection>
 
+
+
+        <CenterSection>
+
         <RightSection>
+
           <WritedContainer>
             <WriteCount>23</WriteCount>
             <WritedText>명이 작성했어요!</WritedText>
