@@ -6,7 +6,4 @@ import Plus from "./plus.svg?react";
 import Share from "./share.svg?react";
 import Bar from "./bar.svg?react";
 
-export default IconIndex({
-  Plugin: [svgr()],
-});
 export { Add, ArrowDown, Check, Deleted, Plus, Share, Bar };

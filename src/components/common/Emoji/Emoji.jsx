@@ -37,6 +37,7 @@ function Emoji() {
         </TopEmojisContainer>
 
         <ActionsContainer>
+
           {!showAllEmojis && sortedEmojiMap.length > TOP_EMOJIS ? (
             <ShowMoreButton onClick={() => setShowAllEmojis(true)}>
               <Icon src={toggle} alt="아래표시" />
@@ -48,6 +49,10 @@ function Emoji() {
 
           ) : (
             <ShowMoreButton onClick={() => setShowAllEmojis(false)}>
+
+          {sortedEmojiMap.length >= 4 && ( // 이모티콘이 4개 이상일 때만 버튼 표시
+            <ShowMoreButton onClick={() => setShowAllEmojis(!showAllEmojis)}>
+
               <Icon src={toggle} alt="아래표시" />
             </ShowMoreButton>
           )}
@@ -83,10 +88,11 @@ function Emoji() {
     </ServieContainer>
   );
 }
+
 export default Emoji;
 const Icon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
 `;
 
 const ServieContainer = styled.div`
@@ -104,7 +110,7 @@ const Header = styled.div`
 `;
 const TopEmojisContainer = styled.div`
   position: relative;
-  left: 4px;
+  left: -10px;
   display: flex;
   gap: 8px;
   bottom: -5px;
@@ -119,7 +125,7 @@ const TopEmojiItem = styled.div`
   background-color: rgba(0, 0, 0, 0.54);
   color: white;
   padding: 8px 12px;
-  gap: 10px;
+  gap: 2px;
   font-size: 20px;
   text-align: center;
 `;
@@ -140,26 +146,28 @@ const ShowMoreButton = styled.button`
   position: relative;
   background-color: transparent;
   border: none;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.Typography[20].fontSize};
   cursor: pointer;
-  color: #000000;
+  color: ${(props) => props.theme.colors.black};
   width: 36px;
   height: 36px;
+  left: -2px;
   padding: 10px;
-  bottom: -5px;
+  bottom: -2px;
 `;
+
 const AddButton = styled.button`
   width: 88px;
   height: 36px;
   border-radius: 6px;
-  border: 1px solid #cccccc;
+  border: 1px solid ${(props) => props.theme.colors.grayScale[300]};
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.Typography[16].fontSize};
   padding: 6px 12px;
   margin-top: 10px;
-  color: black;
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const PickerWrapper = styled.div`
@@ -195,8 +203,9 @@ const MoreEmojisWrapper = styled.div`
 
   width: 312px;
   height: auto;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
+  background-color: ${(props) => props.theme.colors.white};
+  border: 1px solid ${(props) => props.theme.colors.grayScale[300]};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 24px;
   gap: 10px;
@@ -214,10 +223,10 @@ const AllEmojiItem = styled.div`
   height: 36px;
   border-radius: 32px;
   background-color: rgba(0, 0, 0, 0.54);
-  color: white;
+  color: ${(props) => props.theme.colors.white};
   padding: 8px 12px;
-  gap: 10px;
-  font-size: 20px;
+  gap: 2px;
+  font-size: ${(props) => props.theme.Typography[20].fontSize};
   text-align: center;
 `;
 
